@@ -6,6 +6,13 @@
 
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
+    <% @products.each do |item| %>
+      <% if item.id == @order.line_items[0].product_id %>
+        <%= item.name %>
+      <% end %>
+    <% end %>
+
+
     <p>Your order confirmation has been sent to: <%= @order.email %> </p>
   </div>
 
