@@ -1,11 +1,15 @@
+  <div class="well">
+    <%= link_to '+ New Category', [:new, :admin, :category], class: 'btn btn-info' %>
+  </div>
+
     <table class="table table-bordered">
       <thead>
         <tr>
           <th>Category</th>
-          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
         <%= render @categories %>
       </tbody>
+
     </table>
