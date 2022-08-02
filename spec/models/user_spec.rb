@@ -22,5 +22,13 @@ RSpec.describe User, type: :model do
       expect(user.errors.full_messages).to include("Password is too short (minimum is 4 characters)")
     end
 
+    it 'should not save when the email has already been used to register' do
+      user1 = User.new(first_name: "Eugene", last_name: "Krabs", email: "money1@money1.com", password: 'hello', password_confirmation: 'hello')
+      user2 = User.new(first_name: "Eugene", last_name: "Krabs", email: "money1@money1.com", password: 'hello', password_confirmation: 'hello')
+      user1.save
+      user2.save
+      expect(user2.errors.full_messages).to include("Email has already been taken")
+    end
+
   end
 end
