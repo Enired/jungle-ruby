@@ -11,10 +11,18 @@ RSpec.describe Product, type: :model do
 
     it 'should not save with invalid name' do
       category = Category.new
-      product = Product.new(name: nil, price:2003, quantity: 3, category: category)
+      product = Product.new(price:2003, quantity: 3, category: category)
       product.save
       expect(product.errors.full_messages).to include('Name can\'t be blank')
     end
+
+    it 'should not save with an invalid price' do
+      category = Category.new
+      product = Product.new(name: 'Some Plant', quantity: 3, category: category)
+      product.save
+      expect(product.errors.full_messages).to include("Price cents is not a number" || "Price is not a number" || "Price can't be blank")
+    end
+
 
    
 
