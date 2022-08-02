@@ -22,6 +22,13 @@ RSpec.describe Product, type: :model do
       product.save
       expect(product.errors.full_messages).to include("Price cents is not a number" || "Price is not a number" || "Price can't be blank")
     end
+    
+    it 'should not save with an invalid quantity' do
+      category = Category.new
+      product = Product.new(name: 'Some Plant', price: 2003, category: category)
+      product.save
+      expect(product.errors.full_messages).to include("Quantity can't be blank")
+    end
 
 
    
