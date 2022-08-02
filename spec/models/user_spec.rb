@@ -5,7 +5,6 @@ RSpec.describe User, type: :model do
     it 'should not save without a password' do
       user = User.new(first_name: 'Jack', last_name: 'Frost', email: 'jf@jf.com')
       user.save
-      p user.errors.full_messages
       expect(user.errors.full_messages).to include("Password can't be blank")
     end
 
@@ -18,16 +17,28 @@ RSpec.describe User, type: :model do
     it 'should not save when the password length is less than 4' do
       user = User.new(first_name: "Eugene", last_name: "Krabs", email: "money1@money1.com", password: 'hi', password_confirmation: 'hi')
       user.save
-      p user.errors.full_messages #TESTING PURPOSES
       expect(user.errors.full_messages).to include("Password is too short (minimum is 4 characters)")
     end
-
+    
     it 'should not save when the email has already been used to register' do
       user1 = User.new(first_name: "Eugene", last_name: "Krabs", email: "money1@money1.com", password: 'hello', password_confirmation: 'hello')
       user2 = User.new(first_name: "Eugene", last_name: "Krabs", email: "money1@money1.com", password: 'hello', password_confirmation: 'hello')
       user1.save
       user2.save
       expect(user2.errors.full_messages).to include("Email has already been taken")
+    end
+    
+    it 'should not save without a first name' do
+      user = User.new(last_name: "Krabs", email: "money@money.com", password: 'hello', password_confirmation: 'hello')
+      user.save
+      expect(user.errors.full_messages).to include("First name can't be blank")
+    end
+
+    it 'should not save without a last name' do
+      user = User.new(first_name: "Krabs", email: "money@money.com", password: 'hello', password_confirmation: 'hello')
+      user.save
+      p user.errors.full_messages #TESTING PURPOSES
+      expect(user.errors.full_messages).to include("Last name can't be blank")
     end
 
   end
