@@ -37,9 +37,22 @@ RSpec.describe User, type: :model do
     it 'should not save without a last name' do
       user = User.new(first_name: "Krabs", email: "money@money.com", password: 'hello', password_confirmation: 'hello')
       user.save
-      p user.errors.full_messages #TESTING PURPOSES
       expect(user.errors.full_messages).to include("Last name can't be blank")
     end
-
   end
+
+  describe '.authenticate_with_credentials' do
+    it 'should return nil if the user is not authenticated because of a wrong password' do
+      user = User.new(first_name: "Eugene", last_name: "Krabs", email: "money@money.com", password: 'hello', password_confirmation: 'hello')
+      user.save
+      expect(user.authenticate_with_credentials('money@money.com', 'sssss')).to eq(nil)
+    end
+    
+    it 'should return nil if the user is not authenticated because of incorrect email' do
+      user = User.new(first_name: "Eugene", last_name: "Krabs", email: "money@money.com", password: 'hello', password_confirmation: 'hello')
+      user.save
+      expect(user.authenticate_with_credentials('money1@money.com', 'hello')).to eq(nil)
+    end
+  end
+
 end
