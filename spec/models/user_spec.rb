@@ -9,11 +9,11 @@ RSpec.describe User, type: :model do
     #   expect(user.errors.full_messages).to include("Password can't be blank")
     # end
 
-    it 'should save when all fields are filled out' do
-      user = User.new(first_name: "Eugene", last_name: "Krabs", email: "money@money.com", password_digest: 'hello')
+    it 'should not save when the password and password confirmation are not the same' do
+      user = User.new(first_name: "Eugene", last_name: "Krabs", email: "money@money.com", password: 'hello', password_confirmation: 'jesus')
       user.save
-      p user.errors.full_messages
-
+      p user.errors.full_messages #TESTING PURPOSES
+      expect(user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
 
   end
