@@ -19,7 +19,7 @@ describe('testing user login', () => {
       .type('something')
       .get('[type="submit"]')
       .click()
-      .get('.me-auto > :nth-child(2)')
+      .get('#navbarSupportedContent > :nth-child(2) > :nth-child(3) > .nav-link')
       .should('include.text', "Derine Banis")
   })
 });
