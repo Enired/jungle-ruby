@@ -2,6 +2,14 @@
 
 A mini e-commerce application built with Rails 6.1 for purposes of teaching Rails by example.
 
+## Gallery
+#### Homepage
+![Homepage](https://github.com/Enired/jungle-ruby/blob/master/docs/demo_gifs/home_page.gif)
+#### Sign-up process with auto-login
+![Sign-up process with auto-login](https://github.com/Enired/jungle-ruby/blob/master/docs/demo_gifs/sign_up_process.gif)
+#### Buying an Item
+![Buying an Item](https://github.com/Enired/jungle-ruby/blob/master/docs/demo_gifs/buying_an_item.gif)
+
 ## Setup
 
 1. Run `bundle install` to install dependencies
